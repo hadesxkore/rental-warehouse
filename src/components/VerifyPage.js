@@ -1,11 +1,10 @@
 import React, { useState } from 'react'; // Import useState
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import emailIcon from '../images/email.png';
 import { auth } from '../firebase';
 
 function VerifyPage() {
-  const navigate = useNavigate();
   const location = useLocation();
   const [errorMessage, setErrorMessage] = useState(''); // Use useState
 
