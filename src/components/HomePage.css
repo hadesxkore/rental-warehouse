@@ -115,15 +115,16 @@
     
   }
   .btn {
-    width: 80px; /* Adjust button width */
+    width: 100px; /* Adjust button width */
     height: 30px; /* Adjust button height */
-    font-size: smaller; /* Adjust font size */
-    border-width: 1px; /* Adjust border width */
-    
+    font-size: medium; /* Adjust font size */
+    padding:1px;
+    text-align: center;
+   
   }
-
+ 
   .btn img {
-    width: 15px; /* Adjust icon width */
+    width: 50px; /* Adjust icon width */
     height: 15px; /* Adjust icon height */
     margin-right: 8px; /* Adjust icon margin */
   }
