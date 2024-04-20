@@ -28,7 +28,7 @@ body {
 
 .dropdown-item {
   padding: 12px 20px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
   color: #333;
   display: flex;
   align-items: center;
@@ -91,28 +91,33 @@ body {
 .gradient-bg {
   background-image: linear-gradient(to left, #181717, #585858);
 }
+
 .image-container {
-  flex: 0 0 50%; /* Set image container to occupy 50% of the card width */
+  flex: 0 0 40%; /* Adjust image container width to occupy 40% of the card width */
 }
 
 .image-container img {
-  width: 100%; /* Ensure image fills its container */
-  height: 100%; /* Ensure image fills its container */
+  max-width: 100%; /* Set maximum width to 100% */
+  max-height: 100%; /* Set maximum height to 100% */
   object-fit: cover; /* Maintain aspect ratio and cover container */
 }
 
 .text-container {
   flex: 1; /* Let text container occupy remaining space */
   padding: 1rem; /* Add padding to text container */
-  overflow: hidden; /* Hide overflow content */
 }
 
 .text-container p {
   margin: 0; /* Remove default margin */
-  overflow: hidden; /* Hide overflow content */
 }
+
+.card-content {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack text content vertically */
+}
+
 /* Add CSS media queries for responsive design */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .nav-bar {
     flex-direction: column;
     align-items: center;
@@ -136,41 +141,79 @@ body {
   .main-container {
     padding: 1rem;
   }
+  .text-lg  {
+    font-size: 12px; /* Adjust font size smaller */
+    font-weight: bold; /* Reset font weight */
+    
+  }
+  .btn {
+    width: 80px; /* Adjust button width */
+    height: 30px; /* Adjust button height */
+    font-size: smaller; /* Adjust font size */
+    border-width: 1px; /* Adjust border width */
+    
+  }
+
+  .btn img {
+    width: 15px; /* Adjust icon width */
+    height: 15px; /* Adjust icon height */
+    margin-right: 8px; /* Adjust icon margin */
+  }
+
+
+  .user-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: -40px;
+
+    
+  }
+  
+  /* Adjust font size and margin for the name */
+  .user-name {
+    font-size: 12px; /* Adjust font size */
+    padding-bottom: 20px; /* Add margin to align vertically with the icon */
+  }
+
+  .w-20,
+  .h-20 {
+    width: 25px; /* Set width smaller */
+    height: 25px;
+    margin-left: -40px;
+    margin-top: -60px;
+  
+  }
 
   .card {
-    width: 200px; /* Set a fixed width */
-    max-height: 200px; /* Set a maximum height */
-    overflow: auto; /* Allow overflow to be scrolled */
-    display: flex; /* Use flexbox */
+    width: 100%; /* Set width to 100% */
+    max-height: 100%; /* Set maximum height for the card */
+    margin-bottom: 1rem; /* Add some bottom margin for spacing */
     border-radius: 0.5rem; /* Add border radius */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
-}
-
+  }
 
   .card .text-container {
-    max-height: calc(100% - 8rem); /* Set maximum height for text container */
+    max-height: calc(120%); /* Set maximum height for text container */
+    margin-top: -20px;
     overflow: hidden; /* Hide overflow content */
-    padding-bottom: 1rem; /* Add some bottom padding */
-}
+    font-size: 10px;
+  }
+
 
   .dropdown-menu {
     right: -5px;
   }
+
+  .image-container {
+    flex: 0 0 50%; /* Adjust image container width to occupy full width */
+    height: 80%;
+  }
+
+
+ 
 }
 
 /* Further adjustments for smaller screens if needed */
-@media (max-width: 576px) {
-  .nav-bar .flex {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-bar .flex a {
-    margin: 0.5rem 0;
-  }
-}
-
-/* Additional adjustments for very small screens */
 @media (max-width: 375px) {
   .nav-bar .flex {
     flex-direction: row;
@@ -196,4 +239,3 @@ body {
     width: 30%;
   }
 }
-
