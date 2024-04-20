@@ -1,0 +1,199 @@
+/* HomePage.css */
+body {
+  background-color: #eeeeee;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -160%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  width: 200px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(10px); /* Initially hidden below */
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(135deg, #007bff, #00c9ff);
+  color: #ffffff;
+}
+
+.dropdown-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.dropdown-item:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.dropdown-item:last-child:hover {
+  background-color: linear-gradient(135deg, #007bff, #00c9ff);
+}
+
+.nav-bar {
+  box-shadow: 0 7px 4px rgba(0, 0, 0, 0.274); /* Add shadow to the bottom of the nav-bar */
+}
+
+.card:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add hover effect for cards */
+}
+
+.search-button {
+  display: flex;
+  align-items: center;
+  background-color: #5e5d5d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth effect */
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  border-radius: 0.25rem; /* Add border radius for button */
+}
+
+.search-button:hover {
+  background-color: #6b6a6a; /* Change background color on hover */
+  color: #ffffff; /* Change text color on hover */
+}
+
+.search-icon {
+  margin-right: 8px;
+}
+
+.btn:hover {
+  filter: brightness(80%); /* Reduce brightness on hover */
+}
+
+.gradient-bg {
+  background-image: linear-gradient(to left, #181717, #585858);
+}
+.image-container {
+  flex: 0 0 50%; /* Set image container to occupy 50% of the card width */
+}
+
+.image-container img {
+  width: 100%; /* Ensure image fills its container */
+  height: 100%; /* Ensure image fills its container */
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+.text-container {
+  flex: 1; /* Let text container occupy remaining space */
+  padding: 1rem; /* Add padding to text container */
+  overflow: hidden; /* Hide overflow content */
+}
+
+.text-container p {
+  margin: 0; /* Remove default margin */
+  overflow: hidden; /* Hide overflow content */
+}
+/* Add CSS media queries for responsive design */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .nav-bar .logo {
+    margin-bottom: 1rem;
+  }
+
+  .nav-bar .flex {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .nav-bar .flex a {
+    margin: 0.5rem 0;
+  }
+
+  .main-container {
+    padding: 1rem;
+  }
+
+  .card {
+    width: 200px; /* Set a fixed width */
+    max-height: 200px; /* Set a maximum height */
+    overflow: auto; /* Allow overflow to be scrolled */
+    display: flex; /* Use flexbox */
+    border-radius: 0.5rem; /* Add border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+
+  .card .text-container {
+    max-height: calc(100% - 8rem); /* Set maximum height for text container */
+    overflow: hidden; /* Hide overflow content */
+    padding-bottom: 1rem; /* Add some bottom padding */
+}
+
+  .dropdown-menu {
+    right: -5px;
+  }
+}
+
+/* Further adjustments for smaller screens if needed */
+@media (max-width: 576px) {
+  .nav-bar .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-bar .flex a {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Additional adjustments for very small screens */
+@media (max-width: 375px) {
+  .nav-bar .flex {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-bar .flex a {
+    margin: 0;
+  }
+
+  .nav-bar .search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-bar .search-input {
+    width: 60%;
+    margin-right: 0.5rem;
+  }
+
+  .nav-bar .search-button {
+    width: 30%;
+  }
+}
+
