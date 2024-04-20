@@ -157,7 +157,7 @@ function HomePage() {
                     <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image"
+                            alt="Warehouse Image2"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
@@ -213,7 +213,7 @@ function HomePage() {
                     <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image"
+                            alt="Warehouse Image3"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
@@ -269,7 +269,7 @@ function HomePage() {
                     <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image"
+                            alt="Warehouse Image4"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
@@ -325,7 +325,7 @@ function HomePage() {
                     <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image"
+                            alt="Warehouse Image5"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
@@ -381,7 +381,7 @@ function HomePage() {
                     <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image"
+                            alt="Warehouse Image6"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
