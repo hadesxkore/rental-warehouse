@@ -95,7 +95,7 @@ function HomePage() {
                     )}
                 </div>
             </nav>
-            <main className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-4 md:px-36">
+                <main className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-4 md:px-36">
                 {/* Sample card 1 */}
                 <div className="card bg-white rounded-md shadow-md p-2 flex items-center">
                     <div className="image-container">
@@ -153,11 +153,12 @@ function HomePage() {
                     </div>
                 </div>
                     {/* Sample card 1 */}
-                    <div className="card bg-white rounded-md shadow-md p-4 flex items-center">
-                    <div className="image-container3">
+                   {/* Sample card 1 */}
+                <div className="card bg-white rounded-md shadow-md p-2 flex items-center">
+                    <div className="image-container">
                         <img
                             src={sampleImage} // Replace with your image
-                            alt="Warehouse Image2"
+                            alt="Warehouse Image1"
                             className="w-full h-56 rounded-md mb-4" // Added width and height
                             style={{ width: '700px', height: '300px' }} // Adjusted width and height
                         />
@@ -171,9 +172,9 @@ function HomePage() {
     <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
 </div>
 
-                            <p className="text-gray-700 mb-4">
+                            <p className="text-gray-700 mt-2">
                                 Located on bustling Camacio Street, John's Warehouse offers a big
-                                storage blending modern convenience with urban charm. 
+                                storage blending modern convenience with urban charm.
                             </p>
                             <div className="flex items-center mt-2">
                                 <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
@@ -185,7 +186,7 @@ function HomePage() {
         className="user-icon h-8 w-8" 
         onClick={toggleDropdown} 
     />
-                           <div className="flex items-center mt-4 mr-8">
+                           <div className="flex items-center mr-32">
     <img
         src={userProfileIcon}
         alt="User Icon"
