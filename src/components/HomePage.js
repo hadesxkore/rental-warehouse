@@ -91,8 +91,8 @@ function HomePage() {
                         </div>
                     ) : (
                         <>
-                            <Link to="/signup" className="px-4 py-2 rounded-md text-white hover:bg-gray-900 btn gradient-bg">Sign Up</Link>
-                            <Link to="/login" className="px-4 py-2 rounded-md text-white hover:bg-gray-900 btn gradient-bg">Log in</Link>
+                            <Link to="/signup" className="px-4 py-2 rounded-xl text-white hover:bg-gray-900 btn gradient-bg" >Sign Up</Link>
+                            <Link to="/login" className="px-4 py-2 rounded-xl text-white hover:bg-gray-900 btn gradient-bg" style={{ marginLeft: '-0px'}}>Log in</Link>
                         </>
                     )}
                 </div>
@@ -228,11 +228,11 @@ function HomePage() {
                             <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
                         </div>
                         <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className="btn bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
+                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
                                 <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
                                 View
                             </button>
-                            <button className="btn bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
+                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
                                 <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
                                 Contact
                             </button>
