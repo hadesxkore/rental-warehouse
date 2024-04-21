@@ -5,6 +5,7 @@ import googleIcon from '../images/google.png';
 import { auth, GoogleAuthProvider } from '../firebase';
 import backIcon from '../images/back.png'; // Import the back icon image
 import './LoginPage.css';
+
 function LoginPage() {
     const navigate = useNavigate(); // Initialize useNavigate
 
@@ -18,21 +19,41 @@ function LoginPage() {
         // Check if the user is already logged in (persist authentication)
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                // If user is logged in, redirect to homepage
-                navigate('/home');
+                // If user is logged in and email is verified, redirect to homepage
+                if (user.emailVerified) {
+                    navigate('/home');
+                }
             }
         });
-
+    
         // Cleanup function to unsubscribe from the listener when component unmounts
         return () => unsubscribe();
     }, [navigate]);
-
+    
     const handleLoginWithEmailPassword = async () => {
         try {
             setLoading(true); // Start loading animation
-
+    
+            // Check if the password field is empty
+            if (!password.trim()) {
+                setErrorMessage('Please enter your password.');
+                setShowErrorMessage(true);
+                setLoading(false); // Stop loading animation
+                return; // Return to prevent further execution
+            }
+    
             // Sign in with email and password
-            await auth.signInWithEmailAndPassword(email, password);
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            
+            // Check if the user's email is verified
+            if (!userCredential.user.emailVerified) {
+                // If email is not verified, display an error notification
+                setErrorMessage('Please verify your email before logging in.');
+                setShowErrorMessage(true);
+                setLoading(false); // Stop loading animation
+                return; // Return to prevent further execution
+            }
+    
             // Redirect to HomePage upon successful login
             navigate('/home');
         } catch (error) {
@@ -54,7 +75,8 @@ function LoginPage() {
             setLoading(false); // Stop loading animation
         }
     };
-
+    
+    
     const handleLoginWithGoogle = async () => {
         try {
             // Sign in with Google
@@ -67,7 +89,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: '#f1f0ee' }}>
+        <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: '#eeeeee' }}>
             <div className="logo-container mb-18">
                 <img src={logo} alt="Logo" className="logo" style={{ width: '200px' }} />
             </div>
@@ -81,14 +103,17 @@ function LoginPage() {
             <form id="login-form" className="w-full max-w-md bg-white p-8 rounded-lg shadow-md mb-48">
                 <h2 className="text-4xl font-bold mb-6 text-left">Log in</h2>
                 {showErrorMessage && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-                        <strong className="font-bold">Error:</strong>
-                        <span className="block sm:inline"> {errorMessage}</span>
-                        <button onClick={() => setShowErrorMessage(false)} className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 5.652a1 1 0 0 1 1.414 1.414L11.414 10l4.348 4.348a1 1 0 1 1-1.414 1.414L10 11.414l-4.348 4.348a1 1 0 1 1-1.414-1.414L8.586 10 4.238 5.652A1 1 0 1 1 5.652 4.238L10 8.586l4.348-4.348a1 1 0 0 1 1.414 0z"/></svg>
-                        </button>
-                    </div>
-                )}
+    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center justify-between">
+        <div>
+            <strong className="font-bold">Verification Required:</strong>
+            <span className="block sm:inline"> {errorMessage}</span>
+        </div>
+        <button onClick={() => setShowErrorMessage(false)} className="ml-4">
+            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 5.652a1 1 0 0 1 1.414 1.414L11.414 10l4.348 4.348a1 1 0 1 1-1.414 1.414L10 11.414l-4.348 4.348a1 1 0 1 1-1.414-1.414L8.586 10 4.238 5.652A1 1 0 1 1 5.652 4.238L10 8.586l4.348-4.348a1 1 0 0 1 1.414 0z"/></svg>
+        </button>
+    </div>
+)}
+
                 <div className="mb-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
                     <input 
