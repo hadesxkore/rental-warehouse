@@ -122,8 +122,10 @@
     }
     .text-animation {
         margin-top: 40px; /* Adjust margin for smaller screens */
+        font-size: 15px;
     }
     .loading-dots {
         margin-bottom: 20px; /* Adjust margin for smaller screens */
     }
+
 }
