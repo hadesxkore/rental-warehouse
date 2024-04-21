@@ -14,11 +14,14 @@ function ForgotPasswordPage() {
         e.preventDefault();
         setIsLoading(true); // Start loading animation
         try {
+            if (!email) {
+                throw new Error('Please enter your email address.');
+            }
             await auth.sendPasswordResetEmail(email);
             setResetSuccess(true);
             setResetError('');
         } catch (error) {
-            setResetError('An error occurred. Please try again.');
+            setResetError(error.message);
             console.error(error.message);
         } finally {
             setIsLoading(false); // Stop loading animation
