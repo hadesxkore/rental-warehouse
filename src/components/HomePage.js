@@ -16,7 +16,7 @@ import dashboardIcon from '../images/dashboard.png';
 import userProfileIcon from '../images/user.png';
 import logoutIcon from '../images/logout1.png';
 // Import CSS file for animations
-import './homepage.css';
+import './HomePage.css';
 
 function HomePage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
