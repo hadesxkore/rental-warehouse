@@ -1,5 +1,3 @@
-// HomePage.js
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase'; // Import Firebase authentication
@@ -8,13 +6,17 @@ import locationIcon from '../images/location.png';
 import searchIcon from '../images/search.png';
 import userIcon from '../images/userwhite.png';
 import sampleImage from '../images/sample.jpg';
+import locationTagIcon from '../images/location.png';
+import priceTagIcon from '../images/price-tag.png';
+import infoIcon from '../images/info.png';
 
 import viewIcon from '../images/view.png';
 import chatIcon from '../images/chat.png';
 import dashboardIcon from '../images/dashboard.png';
 import userProfileIcon from '../images/user.png';
 import logoutIcon from '../images/logout1.png';
-import './HomePage.css';
+// Import CSS file for animations
+import './homepage.css';
 
 function HomePage() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,335 +54,152 @@ function HomePage() {
     };
 
     return (
-        <div className="main-container">
-            <nav className="nav-bar bg-black flex flex-wrap items-center justify-between px-4 md:px-36 py-2 shadow-md">
-                <div className="flex items-center space-x-4 text-white w-full md:w-auto">
-                    <img src={logo} alt="Company Logo" className="logo" style={{ maxWidth: '200px', maxHeight: '90px' }} />
-                    <Link to="#" className="px-3 py-2 rounded-md hover:bg-gray-700">HOME</Link>
-                    <div className="relative flex items-center">
-                        <input type="text" name="location-search" placeholder="Search for a location" className="px-2 py-2 pr-16 rounded-md text-black w-full md:w-54 focus:outline-none font-semibold" />
-                        <img src={locationIcon} alt="Location Icon" className="absolute right-3 top-3 h-5 w-5" />
-                    </div>
-                    <div className="relative">
-                        <button className="search-button">
-                            <img src={searchIcon} alt="Search Icon" className="search-icon h-5 w-5" />
-                            Search
-                        </button>
-                    </div>
-                </div>
-                <div className="flex items-center space-x-6">
-                    {isLoggedIn ? (
+        <div>
+            <nav className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-4 md:p-6">
+                <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                        <img src={logo} alt="Logo" className="h-20" />
+                        <Link to="/" className="text-lg font-semibold hover:text-gray-300 transition duration-300">Home</Link>
+                        <Link to="/products" className="text-lg font-semibold hover:text-gray-300 transition duration-300">Products</Link>
+                        <Link to="/about" className="text-lg font-semibold hover:text-gray-300 transition duration-300">About Us</Link>
                         <div className="relative">
-                            <img src={userIcon} alt="User Icon" className="cursor-pointer h-12 w-12" onClick={toggleDropdown} />
-                            {isDropdownOpen && (
-                                <div className="dropdown-menu show">
-                                    <Link to="/dashboard" className="dropdown-item">
-                                        <img src={dashboardIcon} alt="Dashboard Icon" />
-                                        Dashboard
-                                    </Link>
-                                    <Link to="/edit-profile" className="dropdown-item">
-                                        <img src={userProfileIcon} alt="User Profile Icon" />
-                                        Edit Profile
-                                    </Link>
-                                    <button onClick={handleLogout} className="dropdown-item">
-                                        <img src={logoutIcon} alt="Logout Icon" />
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
+                            <input type="text" placeholder="Search for a location" className="pl-8 pr-10 py-2 rounded-full bg-gradient-to-r from-gray-700 to-gray-600 text-white focus:outline-none focus:bg-gray-800" />
+                            <img src={locationIcon} alt="Location" className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4" />
+                            <img src={searchIcon} alt="Search" className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 cursor-pointer" />
                         </div>
-                    ) : (
-                        <>
-                            <Link to="/signup" className="px-4 py-2 rounded-xl text-white hover:bg-gray-900 btn gradient-bg" >Sign Up</Link>
-                            <Link to="/login" className="px-4 py-2 rounded-xl text-white hover:bg-gray-900 btn gradient-bg" style={{ marginLeft: '-0px'}}>Log in</Link>
-                        </>
-                    )}
+                    </div>
+                    <div className="flex items-center space-x-6 pt-4">
+                        {!isLoggedIn ? (
+                            <>
+                                <Link to="/signup" className="text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-4 py-2 rounded-lg hover:text-gray-300 transition duration-300">Sign Up</Link>
+                                <Link to="/login" className="text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-400 hover:from-blue-600 hover:to-blue-500 text-white px-4 py-2 rounded-lg hover:text-gray-300 transition duration-300">Log In</Link>
+                            </>
+                        ) : (
+                            <div className="relative">
+                                <img src={userIcon} alt="User" className="h-10 mb-4 cursor-pointer" onClick={toggleDropdown} />
+                                {isDropdownOpen && (
+                                    <div className={`absolute left-1/2 transform -translate-x-1/2 top-12 w-48 bg-white rounded-lg shadow-lg overflow-hidden dropdown-menu ${isDropdownOpen ? 'fadeIn' : ''}`}>
+                                        <Link to="/profile" className="block px-4 py-2 flex items-center hover:bg-gray-200 transition duration-300 text-black">
+                                            <img src={userProfileIcon} alt="Profile" className="h-6 mr-2 text-black" />
+                                            Profile
+                                        </Link>
+                                        <Link to="/dashboard" className="block px-4 py-2 flex items-center hover:bg-gray-200 transition duration-300 text-black">
+                                            <img src={dashboardIcon} alt="Dashboard" className="h-6 mr-2 text-black" />
+                                            Dashboard
+                                        </Link>
+                                        <div className="border-t border-gray-300"></div>
+                                        <button className="block w-full text-left px-4 py-2 flex items-center hover:bg-gray-200 transition duration-300 text-black" onClick={handleLogout}>
+                                            <img src={logoutIcon} alt="Logout" className="h-6 mr-2 text-black" />
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </nav>
-            <main className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-4 md:px-36">
-                {/* Sample card 1 */}
-                <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
+            <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Cards */}
+                <div className="max-w-md p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                    <img src={sampleImage} alt="Product" className="w-full rounded-lg" />
+                    <div className="mt-4">
+                        <h2 className="text-xl font-semibold mb-2">Product Name</h2>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={locationTagIcon} alt="Location" className="h-4 mr-2" />
+                            <p>Address: Address here</p>
                         </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={infoIcon} alt="Description" className="h-4 mr-2" />
+                            <p>Description: Description here</p>
                         </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={priceTagIcon} alt="Price" className="h-4 mr-2" />
+                            <p>Price: Price here</p>
                         </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
+                        <div className="flex items-center mb-4">
+                            <img src={userProfileIcon} alt="Profile" className="h-6 mr-2" />
+                            <span>Owner Name</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <Link to="#" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition duration-300">
+                                <img src={viewIcon} alt="View" className="h-4 mr-2" />
                                 View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
+                            </Link>
+                            <Link to="#" className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition duration-300">
+                                <img src={chatIcon} alt="Chat" className="h-4 mr-2" />
                                 Contact
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                 {/* Sample card 1 */}
-                 <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
+                  {/* Cards */}
+                  <div className="max-w-md p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                    <img src={sampleImage} alt="Product" className="w-full rounded-lg" />
+                    <div className="mt-4">
+                        <h2 className="text-xl font-semibold mb-2">Product Name</h2>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={locationTagIcon} alt="Location" className="h-4 mr-2" />
+                            <p>Address: Address here</p>
                         </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={infoIcon} alt="Description" className="h-4 mr-2" />
+                            <p>Description: Description here</p>
                         </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={priceTagIcon} alt="Price" className="h-4 mr-2" />
+                            <p>Price: Price here</p>
                         </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
+                        <div className="flex items-center mb-4">
+                            <img src={userProfileIcon} alt="Profile" className="h-6 mr-2" />
+                            <span>Owner Name</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <Link to="#" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition duration-300">
+                                <img src={viewIcon} alt="View" className="h-4 mr-2" />
                                 View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
+                            </Link>
+                            <Link to="#" className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition duration-300">
+                                <img src={chatIcon} alt="Chat" className="h-4 mr-2" />
                                 Contact
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                 {/* Sample card 1 */}
-                 <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
+                  {/* Cards */}
+                  <div className="max-w-md p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                    <img src={sampleImage} alt="Product" className="w-full rounded-lg" />
+                    <div className="mt-4">
+                        <h2 className="text-xl font-semibold mb-2">Product Name</h2>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={locationTagIcon} alt="Location" className="h-4 mr-2" />
+                            <p>Address: Address here</p>
                         </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={infoIcon} alt="Description" className="h-4 mr-2" />
+                            <p>Description: Description here</p>
                         </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
+                        <div className="flex items-center text-gray-600 mb-4">
+                            <img src={priceTagIcon} alt="Price" className="h-4 mr-2" />
+                            <p>Price: Price here</p>
                         </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
+                        <div className="flex items-center mb-4">
+                            <img src={userProfileIcon} alt="Profile" className="h-6 mr-2" />
+                            <span>Owner Name</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <Link to="#" className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition duration-300">
+                                <img src={viewIcon} alt="View" className="h-4 mr-2" />
                                 View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
+                            </Link>
+                            <Link to="#" className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition duration-300">
+                                <img src={chatIcon} alt="Chat" className="h-4 mr-2" />
                                 Contact
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                 {/* Sample card 1 */}
-                 <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
-                        </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
-                        </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
-                        </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
-                                View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
-                                Contact
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                 {/* Sample card 1 */}
-                 <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
-                        </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
-                        </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
-                        </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
-                                View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
-                                Contact
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                 {/* Sample card 1 */}
-                 <div className="card bg-white rounded-md shadow-md flex flex-col md:flex-row">
-                    <div className="image-container md:w-1/2">
-                        <img
-                            src={sampleImage} // Replace with your image
-                            alt="Warehouse Image1"
-                            className="w-full h-56 rounded-md mb-4" // Added width and height
-                        />
-                    </div>
-                    <div className="text-container md:w-1/2 p-4">
-                        <h3 className="text-xl font-bold">John's Warehouse</h3>
-                        <div className="flex items-center">
-                            <img src={locationIcon} alt="Location Icon" className="h-5 w-5 mr-2" />
-                            <p className="text-gray-500">Camacho St. Poblacion Balanga</p>
-                        </div>
-                        <p className="text-gray-700 mt-2">
-                            Located on bustling Camacio Street, John's Warehouse offers a big storage blending modern convenience with urban charm.
-                        </p>
-                        <div className="flex items-center mt-2">
-                            <p className="text-lg font-semibold text-blue-500 mr-4">P200,000/Month</p> {/* Updated font size and weight */}
-                        </div>
-                        <div className="flex items-center mt-4">
-                            <img 
-                                src={userIcon} 
-                                alt="User Icon" 
-                                className="user-icon h-8 w-8" 
-                                onClick={toggleDropdown} 
-                            />
-                            <img
-                                src={userProfileIcon}
-                                alt="User Icon"
-                                className="w-20 h-20 mr-2 user-icon"
-                            />
-                            <p className="text-gray-500 text-lg font-bold user-name">Johiriny Lang</p>
-                        </div>
-                        <div className="flex mt-4 space-x-2 justify-end" style={{ marginTop: '-4px' }}>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={viewIcon} alt="View Icon" className="w-5 h-5 mr-2" />
-                                View
-                            </button>
-                            <button className=" bg-white border border-gray-300 text-gray-800 font-semibold px-4 py-2 rounded-md flex items-center justify-center transition duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-900 transform hover:scale-105" style={{ width: '100px', height: '30px' }}>
-                                <img src={chatIcon} alt="Chat Icon" className="w-5 h-5 mr-2" />
-                                Contact
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </main>
+            </div>
         </div>
     );
 }
